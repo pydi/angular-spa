@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="incidentReportApp">
+    <head>
+        <title>Incident Report App</title>
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta charset="UTF-8">
+
+        <!-- load bootstrap and fontawesome via CDN -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        
+      <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+        
+		<style type="text/less">
+			body { font-family:Arial; font-size:14px; }
+			body>span, body>h1 { float:left; width:100%; margin:0; padding:0; margin-bottom:10px; }
+			
+			span { color:#888888;
+                >b { color:black; }
+            }
+			
+			#selected { width:100%; margin-top:20px; }
+            
+            .vertical-centre (@height) { height:@height; line-height:@height !important; display:inline-block; vertical-align:middle; }
+            .border-box { box-sizing:border-box; -moz-box-sizing:border-box; }
+			.transition (@value1,@value2:X,...) { @value: ~`"@{arguments}".replace(/[\[\]]|\,\sX/g, '')`; -webkit-transition: @value; -moz-transition: @value; -ms-transition: @value; -o-transition: @value; transition: @value; }
+			.transform (@value1,@value2:X,...) { @value: ~`"@{arguments}".replace(/[\[\]]|\,\sX/g, '')`; transform:@value; -ms-transform:@value; -webkit-transform:@value; -o-transform:@value; -moz-transform:@value; }
+			
+			@height:40px;
+			@spacing:10px;
+			@placeholder-colour:#AAA;
+			@select-colour:#2875C7;
+			@font-size:14px;
+			@border-colour:#DDD;
+			
+			dropdown { float:left; display:block; width:100%; 
+				>div { float:left; width:100%;
+					>div.dropdown-display { float:left; width:100%; background:white; height:@height; cursor:pointer; border:solid 1px @border-colour; .border-box;
+						@icon-width:14px;
+						>* { float:left; height:100%; .vertical-centre(@height); }
+						>span { font-size:@font-size; width:100%; position:relative; .border-box; padding-right:@icon-width+@spacing*2; padding-left:@spacing;
+							&.placeholder { color:@placeholder-colour; }
+						}
+						>i { position:relative; width:@icon-width; margin-left:(@spacing+@icon-width)*-1; font-size:1.125em; font-weight:bold; padding-right:@spacing; text-align:right; }
+					}
+
+					>div.dropdown-list { float:left; width:100%; position:relative; z-index:999;width:100%; .transform(scale(1, 0)); .transition(-webkit-transform ease 250ms); .transition(transform ease 250ms);
+						>div { position:absolute; width:100%; z-index:2; cursor:pointer; background:white;
+							>div { float:left; width:100%; padding:0 @spacing; font-size:@font-size; .border-box; border:solid 1px @border-colour; border-top:none;
+								@icon-width:20px;
+								&:hover { background:#F0F0F0; }
+								&.selected { background:@select-colour; color:white; }
+								>* { .vertical-centre(@height); }
+								>span { float:left; width:100%; position:relative; padding-right:@icon-width+@spacing; .border-box; color:inherit; }
+								>i { float:left; width:@icon-width; margin-left:@icon-width*-1; display:none; }
+								&.selected>i { display:inline-block; }
+							}
+						}
+					}
+				}
+
+				>div.show>div.dropdown-list { .transform(scale(1, 1)); }
+			}
+            
+            /* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+
+.clearable.x {
+     background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA/klEQVRIS+1UwQ2DMAy0RQboJmWDphL8203aSdpN2j9ITTegm3QAo6AgkKIo2ObBD57BvrMvl0PY+MON8WEnEBXOSlTXdem9fxDR1Tn351CstQdjzAsR703TdGltlqCqKgcAJwDoiOi8RDKBfwCgBIBv27ZWRRAai6JwiHhcIonBvfe/vu9tbpBFF3EkWvCwDWvTHEloMsaMsnCTz1KJ7yAlmRpV4OIG8xQJCWgmV28QChO3hCPWXbGTVBLFmo9rM+5S2TSWJr3Q8E+ysGoDzoqad8LegcbnWhI2KiS3JCT6qJjC7klEF2XYvRHxpg47MYNXFIg2XYGVLd0JRAUHPcjkGaE71EgAAAAASUVORK5CYII=) no-repeat right -10px center;
+     background-size: 16px 16px;
+     background-position: right 5px center;     
+}
+.clearable.onX{ cursor: pointer; }
+
+.required-field{
+    color:red;
+}
+
+.rcorners1 {
+    border-radius: 25px;
+    padding: 0 20px 0 20px; 
+    width: 250px;
+    height: 35px; 
+}
+
+        </style>  
+        
+        
+        
+        
+        <!-- load angular via CDN -->
+        <script src="//code.angularjs.org/1.5.0-rc.0/angular.min.js"></script>
+        <script src="//code.angularjs.org/1.5.0-rc.0/angular-route.min.js"></script>
+        <script src="//code.angularjs.org/1.5.0-rc.0/angular-resource.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.5/less.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="app.js"></script>
+        <script src="directives.js"></script>
+    </head>
+    <body>
+
+        <header style="height:60px">
+			<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/">IncidentReportApp</a>
+				</div>
+
+<!--
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+				</ul>
+-->
+			</div>
+			</nav>
+		</header>
+
+        <div class="container-fluid body-content">
+
+            <div ng-view></div>
+
+		</div>
+        
+    </body>
+</html>

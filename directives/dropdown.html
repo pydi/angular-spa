@@ -1,0 +1,23 @@
+<div class="dropdown-container" ng-class="{ show: listVisible }">
+<!--
+	<div class="dropdown-display" ng-click="show();" ng-class="{ clicked: listVisible }">
+		<span ng-if="!isPlaceholder">{{display}}</span>
+		<span class="placeholder" ng-if="isPlaceholder">{{placeholder}}</span>
+		<i class="glyphicon glyphicon-remove"></i>
+	</div>
+-->
+    <input clear-text type="text" style="width:100%" ng-class="{ clicked: listVisible }" class="form-control clearable " id="user"  placeholder={{placeholder}} required value={{display}} ng-model="userinput">
+	<div class="dropdown-list" >
+		<div>
+			<div ng-repeat="item in list" ng-click="select(item)" ng-class="{ selected: isSelected(item) }">
+                <div class="display:inline-block;float:left"><img ng-src="{{item.image}}"/></div>
+				<div style="display:inline-block;width:60%">
+                    <span  style="display: block;line-height:14px;">{{property !== undefined ? item[property] : item}}</span>
+                    <span style="line-height:14px;">{{property !== undefined ? item.email : item}}</span>
+                </div>
+                <div style="display:inline-block;float:right">{{property !== undefined ? item["companyName"] : item}}</div>
+<!--				<i class="fa fa-check"></i>-->
+			</div>
+		</div>
+	</div>
+</div>

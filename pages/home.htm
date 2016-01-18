@@ -1,0 +1,46 @@
+
+<form id="user-form" name="userform" ng-submit="submit()" >
+    <div class="form-group">
+    <label for="reuiredField">Required Field <span class="required-field">*</span></label>
+    </div>    
+  <div class="form-group">
+    <label for="user">Affected Users <span class="required-field">*</span></label>
+    <dropdown placeholder="Affected user..." list="userInfo" selected="selectedUser" property="name"></dropdown>
+  </div>
+  <div class="form-group">
+    <label for="company">Affected Company<span class="required-field">*</span></label>
+    <input type="text" ng-model="selectedUser.companyName" required=true class="form-control col-xs-4" id="company" placeholder="Company" required>
+  </div>
+<!--
+  <div class="form-group">
+    <label for="incident">File input</label>
+    <input type="file" id="incidentTemplate">
+    <p class="help-block">Example block-level help text here.</p>
+  </div>
+-->
+    <div class="form-group">
+         <label for="incident">Incident Template</label>
+        <div class="input-group">
+            <input id="uploadname" type="text" class="form-control">
+            <a class="input-group-btn btn btn-default go inline">Browse</a>
+        </div>
+    </div>    
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Auto-assign this to best fit group
+    </label>
+  </div>
+  <div class="form-group">
+    <label for="incidentTitle">Incident Title</label>
+    <input type="text" class="form-control" id="incidentTitle" placeholder="Type a title for this incident">
+  </div>
+<div class="form-group">
+    <label for="calculatedPriority" >Caluculated Priority:</label> <span class="rcorners1" style="background-color:{{colours[selectedUser.priority]}}">{{selectedUser.priority}}</span>
+  </div>
+</form>
+<footer> 
+   <div class="pull-right" style="margin-top:20px">
+        <button class="btn" type="button">Cancel</button>
+        <button class="btn btn-primary" style="margin-right:20px" ng-disabled="userform.$invalid" ng-click="submit()">Save</button>
+    </div>
+</footer>
