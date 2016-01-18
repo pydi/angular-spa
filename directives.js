@@ -46,7 +46,7 @@ incidentReportApp.directive("dropdown", function($rootScope, $http, $q ) {
 //                        });
 //                    }
 //            }; 
-            scope.userinput="";
+            //scope.userinput="";
             scope.$watch('userinput', function(newValue){
                 if(newValue){
                     if(newValue.length > 2){
@@ -69,7 +69,7 @@ incidentReportApp.directive("dropdown", function($rootScope, $http, $q ) {
 			scope.$watch("selected", function(value) {
 				scope.isPlaceholder = scope.selected[scope.property] === undefined;
 				scope.display = scope.selected[scope.property];
-                //scope.listVisible = false;
+                scope.userinput = scope.selected[scope.property];
 			});
 		}
 	}

@@ -6,7 +6,8 @@
 		<i class="glyphicon glyphicon-remove"></i>
 	</div>
 -->
-    <input clear-text type="text" style="width:100%" ng-class="{ clicked: listVisible }" class="form-control clearable " id="user"  placeholder={{placeholder}} required value={{display}} ng-model="userinput">
+    <input clear-text type="text" style="width:100%" ng-class="{ clicked: listVisible }" class="form-control clearable" id="user"  placeholder={{placeholder}} required value={{display}} ng-model="userinput" >
+<!--    ng-model="userinput"-->
 	<div class="dropdown-list" >
 		<div>
 			<div ng-repeat="item in list" ng-click="select(item)" ng-class="{ selected: isSelected(item) }">
